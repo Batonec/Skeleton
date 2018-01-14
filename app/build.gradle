@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "ru.batonec.skeleton"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+kapt {
+    generateStubs true
+}
+
+ext {
+    supportLibraryVersion = "27.0.2"
+    moxyVersion = "1.4.6"
+    toothpickVersion = "1.0.6"
+    retrofitVersion = "2.2.0"
+}
+
+dependencies {
+    //Support
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:design:$supportLibraryVersion"
+    compile "com.android.support.constraint:constraint-layout:1.0.2"
+    //Kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    //Log
+    compile "com.jakewharton.timber:timber:4.5.1"
+    //MVP
+    kapt "com.arello-mobile:moxy-compiler:$moxyVersion"
+    compile "com.arello-mobile:moxy-app-compat:$moxyVersion"
+    //DI
+    kapt 'com.google.dagger:dagger-compiler:2.5'
+    compile 'com.google.dagger:dagger:2.5'
+    //Gson
+    compile "com.google.code.gson:gson:2.8.0"
+    //Retrofit
+    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:3.6.0"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    //RxJava
+    compile "io.reactivex.rxjava2:rxandroid:2.0.1"
+    compile "io.reactivex.rxjava2:rxjava:2.1.0"
+    //JUnit
+    testCompile "junit:junit:4.12"
+    //Mockito
+    testCompile "org.mockito:mockito-core:2.8.9"
+    //Mockito Kotlin
+    testCompile "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
+}
