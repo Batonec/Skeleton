@@ -3,8 +3,9 @@ package ru.batonec.skeleton.presentation.launch
 import com.arellomobile.mvp.InjectViewState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import ru.batonec.skeleton.R
+import ru.batonec.skeleton.ScreenKeys
 import ru.batonec.skeleton.data.ResourceManager
+import ru.batonec.skeleton.di.DependencyManager
 import ru.batonec.skeleton.domain.launch.LaunchInteractor
 import ru.batonec.skeleton.presentation.base.BasePresenter
 import timber.log.Timber
@@ -17,11 +18,6 @@ class LaunchPresenter @Inject constructor(
         private val interactor: LaunchInteractor
 ) : BasePresenter<LaunchView>() {
 
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-        viewState.showInfo(resourceManager.getString(R.string.app_name))
-    }
-
     fun performLongTask() {
         interactor.getInfo().delay(300, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
@@ -29,7 +25,10 @@ class LaunchPresenter @Inject constructor(
                 .doOnSubscribe { viewState.showProgress() }
                 .doAfterTerminate { viewState.hideProgress() }
                 .subscribe(
-                        { viewState.showInfo(it) },
+                        {
+                            DependencyManager.openSessionComponent(it)
+                            viewState.navigateToScreen(ScreenKeys.MainScreen)
+                        },
                         { viewState.showError(it.toString()); Timber.e(it) }
                 )
                 .connect()

@@ -1,8 +1,11 @@
 package ru.batonec.skeleton.domain.launch
 
-import ru.batonec.skeleton.data.LaunchRepository
+import ru.batonec.skeleton.data.launch.LaunchRepository
+import java.util.*
 import javax.inject.Inject
 
-class LaunchInteractor @Inject constructor(private val repository: LaunchRepository) {
-    fun getInfo() = repository.getInfo()
+class LaunchInteractor @Inject constructor(
+        private val launchRepository: LaunchRepository
+) {
+    fun getInfo() = launchRepository.getInfo(UUID.randomUUID())
 }

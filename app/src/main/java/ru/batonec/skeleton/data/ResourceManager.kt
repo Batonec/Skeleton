@@ -4,5 +4,5 @@ import android.content.Context
 import android.support.annotation.StringRes
 
 class ResourceManager(private val context: Context) {
-    fun getString(@StringRes stringId: Int) = context.getString(stringId)
+    fun getString(@StringRes stringId: Int): String = context.getString(stringId)
 }

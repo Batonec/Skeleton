@@ -1,9 +1,6 @@
 package ru.batonec.skeleton.presentation.launch
 
-import com.arellomobile.mvp.MvpView
-
-interface LaunchView : MvpView {
-    fun showInfo(info: String)
+interface LaunchView : ru.batonec.skeleton.presentation.base.NavigationView {
     fun showError(error: String)
     fun showProgress()
     fun hideProgress()

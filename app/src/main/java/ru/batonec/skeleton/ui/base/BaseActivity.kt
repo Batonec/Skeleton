@@ -13,5 +13,5 @@ abstract class BaseActivity : MvpAppCompatActivity() {
         setContentView(layoutResource)
     }
 
-    open fun toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT)
+    open fun toast(message: String): Toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
 }
